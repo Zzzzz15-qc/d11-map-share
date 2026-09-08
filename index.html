@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>D11 作战地图 · 运动户外 AI 全链路解法与节奏指南</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#3E3EFF;
+  --blue-deep:#1F3AC3;
+  --blue-soft:#74A4E4;
+  --blue-ice:#ADD7F6;
+  --purple:#5A2CFF;
+  --sky:#1F9AFF;
+  --cyan:#10DBE5;
+  --orange:#F7714D;
+  --magenta:#E1485F;
+  --ink:#1a1a2e;
+  --text:#2D3033;
+  --text-2:#5a5d63;
+  --text-3:#8a8d95;
+  --text-4:#b8bac0;
+  --line:#E1E1E3;
+  --bg:#FAFBFF;
+  --bg-2:#F4F6FF;
+  --card:#ffffff;
+  --shadow:0 10px 40px rgba(31,58,195,.08),0 2px 8px rgba(31,58,195,.04);
+  --shadow-lg:0 20px 60px rgba(31,58,195,.12),0 4px 16px rgba(31,58,195,.06);
+  --shadow-hover:0 24px 64px rgba(31,58,195,.18),0 6px 20px rgba(31,58,195,.1);
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:"Inter","PingFang SC","Microsoft YaHei",sans-serif;
+  line-height:1.7;overflow-x:hidden;font-feature-settings:"ss01","cv11";
+}
+
+/* =========== Nav =========== */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);background:rgba(250,251,255,.72);border-bottom:1px solid rgba(62,62,255,.08);padding:14px 0}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:.95rem}
+.nav-dot{width:10px;height:10px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--purple));box-shadow:0 0 12px rgba(62,62,255,.6)}
+.nav-brand-text{background:linear-gradient(135deg,var(--blue-deep),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.nav-links{display:flex;gap:32px}
+.nav-links a{font-size:.82rem;color:var(--text-3);text-decoration:none;font-weight:500;transition:color .2s;position:relative}
+.nav-links a:hover{color:var(--blue)}
+.nav-links a::after{content:"";position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.nav-links a:hover::after{transform:scaleX(1)}
+@media(max-width:720px){.nav-links{display:none}}
+
+/* =========== Layout =========== */
+.wrap{max-width:1280px;margin:0 auto;padding:0 40px}
+section{padding:100px 0;position:relative}
+
+/* =========== Hero =========== */
+.hero{min-height:100vh;padding:140px 0 80px;display:flex;align-items:center;position:relative;overflow:hidden;
+  background:radial-gradient(ellipse at 20% 30%,rgba(62,62,255,.18),transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(90,44,255,.14),transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(31,154,255,.12),transparent 50%),linear-gradient(180deg,#FAFBFF 0%,#F4F6FF 100%);
+}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(circle at 1px 1px,rgba(62,62,255,.06) 1px,transparent 0);background-size:32px 32px;mask-image:radial-gradient(ellipse at center,#000 40%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse at center,#000 40%,transparent 75%);pointer-events:none}
+.hero-inner{position:relative;z-index:2;max-width:1280px;margin:0 auto;padding:0 40px}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;padding:7px 16px;border-radius:100px;background:rgba(255,255,255,.7);backdrop-filter:blur(10px);border:1px solid rgba(62,62,255,.15);font-size:.78rem;font-weight:600;color:var(--blue-deep);letter-spacing:.02em;margin-bottom:28px}
+.hero-eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.3)}}
+.hero h1{font-family:"Noto Serif SC",serif;font-size:clamp(2.2rem,5.5vw,4.4rem);font-weight:900;line-height:1.08;letter-spacing:-.03em;margin-bottom:24px;max-width:980px}
+.hero h1 .g1{background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue) 40%,var(--purple) 80%,var(--magenta) 120%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero h1 .g2{background:linear-gradient(135deg,var(--sky) 0%,var(--cyan) 50%,var(--blue) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* Fancy hero description */
+.hero-desc{margin-bottom:40px;max-width:860px}
+.hero-desc-main{
+  font-size:1.15rem;color:var(--text);line-height:1.85;margin-bottom:20px;
+  font-weight:400;
+}
+.hero-desc-main strong{font-weight:800;color:var(--blue-deep)}
+.hero-desc-main .hl-purple{color:var(--purple);font-weight:700}
+.hero-desc-main .hl-magenta{color:var(--magenta);font-weight:700}
+.hero-desc-keywords{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.hero-kw{
+  padding:6px 14px;border-radius:8px;font-size:.78rem;font-weight:600;
+  background:rgba(255,255,255,.8);backdrop-filter:blur(8px);border:1px solid rgba(62,62,255,.1);
+}
+
+/* Hero bottom foundation */
+.hero-foundation{
+  display:flex;align-items:stretch;gap:0;margin-bottom:40px;flex-wrap:wrap;
+  max-width:880px;
+}
+.hero-found-base{
+  display:flex;flex-direction:column;justify-content:center;align-items:center;gap:6px;
+  padding:18px 24px;border-radius:16px 0 0 16px;
+  background:linear-gradient(135deg,rgba(90,44,255,.08),rgba(62,62,255,.06));
+  border:1px solid rgba(90,44,255,.2);border-right:none;
+  min-width:180px;
+}
+.hero-found-base .fb-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--blue));display:flex;align-items:center;justify-content:center;margin-bottom:4px}
+.hero-found-base .fb-title{font-family:"Noto Serif SC",serif;font-size:.92rem;font-weight:800;color:var(--purple)}
+.hero-found-base .fb-sub{font-size:.7rem;color:var(--text-3);font-weight:500}
+.hero-found-ais{
+  display:flex;flex:1;min-width:300px;
+}
+.hero-found-ai{
+  flex:1;display:flex;align-items:center;gap:12px;
+  padding:16px 20px;
+  background:rgba(255,255,255,.75);backdrop-filter:blur(10px);
+  border:1px solid rgba(62,62,255,.12);
+}
+.hero-found-ai:first-child{border-right:none}
+.hero-found-ai:last-child{border-radius:0 16px 16px 0}
+.hero-found-ai .fa-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.hero-found-ai .fa-content{display:flex;flex-direction:column;gap:2px}
+.hero-found-ai .fa-name{font-size:.85rem;font-weight:700}
+.hero-found-ai .fa-desc{font-size:.7rem;color:var(--text-3)}
+.hero-found-x{
+  display:flex;align-items:center;justify-content:center;
+  font-family:"Noto Serif SC",serif;font-size:1.4rem;font-weight:900;
+  color:var(--purple);opacity:.5;padding:0 4px;
+}
+
+.hero-cta{display:inline-flex;align-items:center;gap:12px;padding:14px 28px;border-radius:14px;background:linear-gradient(135deg,var(--blue-deep),var(--blue),var(--purple));color:#fff;font-weight:600;font-size:.95rem;text-decoration:none;box-shadow:0 10px 30px rgba(31,58,195,.35);transition:all .3s;position:relative;overflow:hidden}
+.hero-cta::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,var(--purple),var(--magenta));opacity:0;transition:opacity .3s}
+.hero-cta span{position:relative;z-index:1;display:flex;align-items:center;gap:12px}
+.hero-cta:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(31,58,195,.5)}
+.hero-cta:hover::before{opacity:1}
+
+.orb{position:absolute;border-radius:50%;filter:blur(60px);opacity:.5;pointer-events:none;animation:float 10s ease-in-out infinite}
+.orb-1{width:380px;height:380px;background:var(--blue);top:-60px;right:-80px}
+.orb-2{width:320px;height:320px;background:var(--purple);bottom:10%;left:-60px;animation-delay:-3s}
+.orb-3{width:240px;height:240px;background:var(--cyan);top:40%;right:20%;animation-delay:-6s;opacity:.3}
+@keyframes float{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(30px,-40px) scale(1.08)}}
+
+.hero-modules{margin-top:40px;display:flex;gap:14px;flex-wrap:wrap}
+.hero-mod-chip{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 22px;border-radius:14px;
+  background:rgba(255,255,255,.78);backdrop-filter:blur(12px);
+  border:1px solid rgba(62,62,255,.15);
+  font-size:.85rem;font-weight:700;transition:all .3s;
+}
+.hero-mod-chip:hover{transform:translateY(-2px);box-shadow:var(--shadow);border-color:var(--blue)}
+.hero-mod-chip .hm-num{
+  font-family:"Noto Serif SC",serif;font-size:1.3rem;font-weight:900;line-height:1;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-mod-chip.hm1 .hm-num{background:linear-gradient(135deg,var(--blue-deep),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-mod-chip.hm2 .hm-num{background:linear-gradient(135deg,var(--purple),var(--magenta));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-mod-chip.hm3 .hm-num{background:linear-gradient(135deg,var(--cyan),var(--sky));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-mod-chip .hm-text{display:flex;flex-direction:column;gap:1px}
+.hero-mod-chip .hm-title{font-weight:800;color:var(--text)}
+.hero-mod-chip .hm-sub{font-size:.7rem;font-weight:500;color:var(--text-3)}
+
+/* =========== Section Head =========== */
+.sec-head{margin-bottom:64px;max-width:860px}
+.sec-eyebrow{display:inline-block;font-size:.78rem;font-weight:700;color:var(--blue);letter-spacing:.15em;text-transform:uppercase;margin-bottom:16px}
+.sec-title{font-family:"Noto Serif SC",serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;line-height:1.15;letter-spacing:-.02em;margin-bottom:18px}
+.sec-title .grad{background:linear-gradient(135deg,var(--blue-deep),var(--blue) 50%,var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sec-desc{font-size:1.05rem;color:var(--text-2);line-height:1.7}
+
+/* =========== Timeline =========== */
+#rhythm{background:var(--bg);position:relative}
+
+/* KPI bar above timeline */
+.kpi-strip{
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:28px;
+}
+.kpi-item{
+  background:rgba(255,255,255,.8);backdrop-filter:blur(10px);
+  border:1px solid rgba(62,62,255,.1);border-radius:14px;
+  padding:14px 18px;text-align:center;position:relative;overflow:hidden;
+}
+.kpi-item::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-item.k1::before{background:var(--blue-deep)}
+.kpi-item.k2::before{background:var(--purple)}
+.kpi-item.k3::before{background:var(--magenta)}
+.kpi-phase{font-size:.7rem;font-weight:700;letter-spacing:.1em;color:var(--text-3);margin-bottom:8px;text-transform:uppercase}
+.kpi-nums{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.kpi-num{display:flex;flex-direction:column;align-items:center;gap:2px}
+.kpi-num .val{font-family:"Noto Serif SC",serif;font-size:1.2rem;font-weight:900;line-height:1}
+.kpi-num .lbl{font-size:.62rem;color:var(--text-3);font-weight:500}
+.kpi-item.k1 .val{color:var(--blue-deep)}
+.kpi-item.k2 .val{color:var(--purple)}
+.kpi-item.k3 .val{color:var(--magenta)}
+.kpi-ratio{display:flex;align-items:center;gap:0;margin-top:8px;padding:6px 10px;border-radius:10px;background:rgba(62,62,255,.04)}
+.kpi-ratio-bar{height:8px;border-radius:4px;transition:width .6s}
+.kpi-ratio-bar.brand{background:linear-gradient(90deg,var(--blue-deep),var(--blue))}
+.kpi-ratio-bar.perf{background:linear-gradient(90deg,var(--orange),var(--magenta))}
+.kpi-ratio-vals{display:flex;justify-content:space-between;margin-top:4px;font-size:.68rem;font-weight:700}
+.kpi-ratio-vals .rv-brand{color:var(--blue-deep)}
+.kpi-ratio-vals .rv-perf{color:var(--magenta)}
+
+.journey-container{position:relative;padding:40px 0 20px;min-height:980px}
+.journey-svg{width:100%;height:auto;display:block;overflow:visible}
+.journey-node{
+  position:absolute;width:350px;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(14px);
+  border:1px solid rgba(62,62,255,.15);
+  border-radius:18px;padding:20px;
+  box-shadow:var(--shadow);
+  transition:all .4s cubic-bezier(.2,.8,.2,1);
+}
+.journey-node:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover);border-color:var(--blue)}
+.journey-node .ph-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.15em;color:#fff;padding:4px 12px;border-radius:6px;margin-bottom:10px}
+.journey-node.n1 .ph-tag{background:var(--blue-deep)}
+.journey-node.n2 .ph-tag{background:var(--purple)}
+.journey-node.n3 .ph-tag{background:var(--magenta)}
+.journey-node h4{font-family:"Noto Serif SC",serif;font-size:1.1rem;font-weight:700;line-height:1.25;margin-bottom:14px}
+
+/* Prominent node sections */
+.node-sec{margin-bottom:14px;padding-bottom:12px;border-bottom:1px solid rgba(62,62,255,.06)}
+.node-sec:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.node-sec-title{
+  font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  margin-bottom:6px;display:flex;align-items:center;gap:6px;
+}
+.node-sec-title .nst-dot{width:6px;height:6px;border-radius:50%}
+.node-sec-title.t-pos{color:var(--blue-deep)}
+.node-sec-title.t-pos .nst-dot{background:var(--blue-deep)}
+.node-sec-title.t-crowd{color:var(--purple)}
+.node-sec-title.t-crowd .nst-dot{background:var(--purple)}
+.node-sec-title.t-prod{color:var(--magenta)}
+.node-sec-title.t-prod .nst-dot{background:var(--magenta)}
+
+.node-sec-text{font-size:.8rem;color:var(--text);line-height:1.65}
+.node-sec-text strong{color:var(--blue-deep);font-weight:700}
+
+/* Product × AI pills - more prominent */
+.prod-ai-row{display:flex;flex-direction:column;gap:6px}
+.prod-ai-line{
+  display:flex;align-items:center;gap:0;flex-wrap:wrap;
+  padding:5px 10px;border-radius:8px;
+  background:var(--bg-2);border:1px solid rgba(62,62,255,.06);
+  font-size:.76rem;
+}
+.prod-ai-line .pa-prod{font-weight:700;color:var(--text);flex-shrink:0}
+.prod-ai-line .pa-sep{color:var(--text-4);margin:0 6px;font-size:.65rem}
+.prod-ai-line .pa-ai{
+  font-weight:700;color:var(--purple);
+  padding:2px 8px;border-radius:5px;background:rgba(90,44,255,.1);
+  font-size:.72rem;
+}
+
+@media(max-width:900px){
+  .journey-svg{display:none}
+  .journey-node{position:relative;left:auto !important;top:auto !important;width:100%;margin-bottom:14px}
+  .journey-container{display:flex;flex-direction:column;min-height:auto}
+  .kpi-strip{grid-template-columns:1fr}
+}
+
+/* =========== Crowd Flow =========== */
+#crowd{background:linear-gradient(180deg,var(--bg) 0%,var(--bg-2) 100%)}
+.crowd-wrap{position:relative;background:radial-gradient(ellipse at 20% 30%,rgba(62,62,255,.08),transparent 55%),radial-gradient(ellipse at 80% 70%,rgba(90,44,255,.08),transparent 55%),#fff;border-radius:28px;padding:60px 40px;border:1px solid rgba(62,62,255,.1);box-shadow:var(--shadow)}
+.crowd-svg{width:100%;height:auto;display:block}
+.crowd-node{background:#fff;border-radius:16px;padding:18px 20px;border:1px solid rgba(62,62,255,.15);box-shadow:0 4px 16px rgba(31,58,195,.06)}
+.crowd-node .cn-title{font-family:"Noto Serif SC",serif;font-size:.92rem;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+.crowd-node .cn-title .d{width:8px;height:8px;border-radius:50%}
+.crowd-node .cn-sub{font-size:.72rem;color:var(--text-3);margin-bottom:8px}
+.crowd-node .cn-crowd{font-size:.76rem;color:var(--text);line-height:1.55;margin-bottom:8px;padding:8px 10px;border-radius:8px;background:var(--bg-2)}
+.crowd-node .cn-crowd strong{color:var(--blue-deep);font-weight:700}
+.crowd-node ul{list-style:none;padding:0}
+.crowd-node ul li{font-size:.75rem;color:var(--text-2);padding:3px 0 3px 14px;position:relative;line-height:1.5}
+.crowd-node ul li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--blue)}
+.crowd-node ul li strong{color:var(--blue-deep);font-weight:700}
+.crowd-node .ai-badge{display:inline-flex;align-items:center;gap:4px;font-size:.65rem;font-weight:700;color:var(--purple);padding:2px 7px;border-radius:4px;background:rgba(90,44,255,.1);margin-left:4px}
+
+.crowd-foundation{background:rgba(90,44,255,.04);border:1.5px dashed rgba(90,44,255,.2);border-radius:16px;padding:14px 20px}
+.crowd-foundation .cf-title{font-family:"Noto Serif SC",serif;font-size:.95rem;font-weight:800;color:var(--purple);margin-bottom:4px}
+.crowd-foundation .cf-sub{font-size:.72rem;color:var(--text-3)}
+.crowd-foundation .cf-chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.crowd-foundation .cf-chip{padding:5px 12px;border-radius:8px;font-size:.72rem;font-weight:600}
+.crowd-foundation .cf-chip.damo{background:rgba(90,44,255,.1);color:var(--purple)}
+.crowd-foundation .cf-chip.ai{background:rgba(62,62,255,.08);color:var(--blue)}
+
+/* =========== Growth Paths =========== */
+.growth-paths{
+  display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:32px;
+}
+@media(max-width:900px){.growth-paths{grid-template-columns:1fr}}
+.growth-path{
+  background:var(--bg-2);
+  border:1px solid rgba(62,62,255,.12);border-radius:20px;
+  padding:28px;position:relative;overflow:hidden;
+  transition:all .35s;
+}
+.growth-path:hover{transform:translateY(-4px);box-shadow:var(--shadow);background:#fff}
+.growth-path::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+.growth-path.gp1::before{background:linear-gradient(90deg,var(--blue-deep),var(--blue),var(--purple))}
+.growth-path.gp2::before{background:linear-gradient(90deg,var(--orange),var(--magenta),var(--purple))}
+.gp-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:8px;font-size:.7rem;font-weight:700;
+  margin-bottom:12px;letter-spacing:.05em;
+}
+.gp1 .gp-badge{background:rgba(62,62,255,.08);color:var(--blue-deep)}
+.gp2 .gp-badge{background:rgba(225,72,95,.08);color:var(--magenta)}
+.gp-title{font-family:"Noto Serif SC",serif;font-size:1.15rem;font-weight:800;margin-bottom:6px}
+.gp-subtitle{font-size:.8rem;color:var(--text-2);margin-bottom:16px;line-height:1.6}
+.gp-flow{
+  display:flex;align-items:center;gap:0;flex-wrap:wrap;margin-bottom:16px;
+  padding:10px 14px;border-radius:12px;background:var(--bg-2);
+}
+.gp-flow-item{
+  padding:4px 12px;border-radius:8px;font-size:.75rem;font-weight:700;
+  background:#fff;border:1px solid rgba(62,62,255,.1);
+}
+.gp-flow-arrow{padding:0 6px;font-size:.9rem;color:var(--text-4)}
+.gp-kpis{display:flex;gap:12px;flex-wrap:wrap}
+.gp-kpi{
+  flex:1;min-width:120px;padding:10px 14px;border-radius:10px;
+  background:var(--bg-2);border:1px solid rgba(62,62,255,.06);
+  text-align:center;
+}
+.gp-kpi .gk-val{font-family:"Noto Serif SC",serif;font-size:1.1rem;font-weight:900;line-height:1;margin-bottom:3px}
+.gp1 .gk-val{color:var(--blue-deep)}
+.gp2 .gk-val{color:var(--magenta)}
+.gp-kpi .gk-lbl{font-size:.68rem;color:var(--text-3);font-weight:500}
+
+/* =========== Product Upgrades =========== */
+#upgrades{background:var(--bg)}
+
+/* AI capability prominent banners */
+.ai-cap-bar{
+  display:flex;align-items:center;gap:14px;
+  padding:14px 22px;border-radius:14px;margin-bottom:12px;
+  position:relative;overflow:hidden;
+}
+.ai-cap-bar::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;opacity:.06;pointer-events:none;background:linear-gradient(90deg,currentColor,transparent)}
+.ai-cap-bar.bar-aigc{
+  background:linear-gradient(135deg,rgba(90,44,255,.12),rgba(225,72,95,.08));
+  border:2px solid rgba(90,44,255,.3);color:var(--purple);
+}
+.ai-cap-bar.bar-agent{
+  background:linear-gradient(135deg,rgba(16,219,229,.12),rgba(31,58,195,.08));
+  border:2px solid rgba(16,219,229,.3);color:var(--blue-deep);
+}
+.ai-cap-bar .acb-icon{
+  font-size:1.4rem;flex-shrink:0;width:36px;height:36px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+}
+.bar-aigc .acb-icon{background:linear-gradient(135deg,var(--purple),var(--magenta));color:#fff}
+.bar-agent .acb-icon{background:linear-gradient(135deg,var(--cyan),var(--sky));color:#fff}
+.ai-cap-bar .acb-body{flex:1}
+.ai-cap-bar .acb-title{font-family:"Noto Serif SC",serif;font-size:.92rem;font-weight:800;line-height:1.3}
+.bar-aigc .acb-title{color:var(--purple)}
+.bar-agent .acb-title{color:var(--blue-deep)}
+.ai-cap-bar .acb-sub{font-size:.76rem;color:var(--text-2);margin-top:2px}
+.ai-cap-bar .acb-sub strong{font-weight:700}
+.bar-aigc .acb-sub strong{color:var(--purple)}
+.bar-agent .acb-sub strong{color:var(--cyan)}
+
+.upgrade-summary{
+  background:linear-gradient(135deg,rgba(62,62,255,.06),rgba(90,44,255,.04));
+  border:1px solid rgba(62,62,255,.12);border-radius:20px;padding:28px 32px;margin-bottom:40px;
+  text-align:center;
+}
+.upgrade-summary .us-title{font-family:"Noto Serif SC",serif;font-size:1.05rem;font-weight:800;color:var(--blue-deep);margin-bottom:14px}
+.upgrade-summary .us-chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.us-chip{
+  padding:8px 16px;border-radius:10px;font-size:.82rem;font-weight:600;
+  background:#fff;border:1px solid rgba(62,62,255,.1);
+  display:inline-flex;align-items:center;gap:8px;
+}
+.us-chip .usc-dot{width:8px;height:8px;border-radius:50%}
+.us-chip .usc-dot.ai{background:var(--purple)}
+.us-chip .usc-dot.new{background:var(--magenta)}
+.us-chip .usc-dot.up{background:var(--blue)}
+.us-chip .usc-dot.link{background:var(--cyan)}
+
+/* Category-grouped upgrade layout */
+.ug-groups{display:flex;flex-direction:column;gap:28px}
+.ug-group{
+  background:#fff;border:1px solid rgba(62,62,255,.08);border-radius:20px;
+  padding:24px 28px;box-shadow:var(--shadow);
+}
+.ug-cat{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.ug-cat-badge{
+  display:inline-flex;align-items:center;padding:5px 14px;border-radius:8px;
+  font-size:.72rem;font-weight:700;letter-spacing:.08em;
+}
+.ug-cat-badge.cat-new{background:rgba(225,72,95,.1);color:var(--magenta)}
+.ug-cat-badge.cat-ai{background:rgba(90,44,255,.1);color:var(--purple)}
+.ug-cat-badge.cat-up{background:rgba(62,62,255,.08);color:var(--blue)}
+.ug-cat-title{font-family:"Noto Serif SC",serif;font-size:.95rem;font-weight:800;color:var(--text)}
+.ug-sub-label{
+  font-family:"Noto Serif SC",serif;font-size:.82rem;font-weight:700;
+  padding:6px 14px;margin:12px 0 8px;border-radius:8px;display:inline-block;
+}
+.ug-sub-label.nei{color:var(--blue-deep);background:rgba(31,58,195,.06)}
+.ug-sub-label.wai{color:#0a7e8c;background:rgba(16,219,229,.08)}
+.ug-items{display:flex;flex-direction:column;gap:8px}
+.ug-item{
+  display:flex;align-items:center;gap:12px;
+  padding:10px 16px;border-radius:12px;
+  background:var(--bg-2);border:1px solid rgba(62,62,255,.04);
+  transition:background .2s;
+}
+.ug-item:hover{background:rgba(62,62,255,.04)}
+.ug-item .ugi-src{
+  display:inline-flex;padding:2px 8px;border-radius:5px;
+  font-size:.6rem;font-weight:700;letter-spacing:.05em;flex-shrink:0;white-space:nowrap;
+}
+.ugi-src.nei{background:rgba(31,58,195,.08);color:var(--blue-deep)}
+.ugi-src.wai{background:rgba(16,219,229,.1);color:#0a7e8c}
+.ug-item .ugi-name{font-size:.82rem;font-weight:700;color:var(--text);flex-shrink:0;min-width:90px}
+.ug-item .ugi-desc{font-size:.76rem;color:var(--text-2);line-height:1.5;flex:1}
+.ug-item .ugi-desc strong{color:var(--blue-deep);font-weight:700}
+.ug-item .ugi-tag{
+  display:inline-flex;padding:2px 8px;border-radius:5px;
+  font-size:.6rem;font-weight:700;letter-spacing:.05em;white-space:nowrap;flex-shrink:0;
+}
+.ugi-tag.new{background:rgba(225,72,95,.1);color:var(--magenta)}
+.ugi-tag.ai{background:rgba(90,44,255,.1);color:var(--purple)}
+.ugi-tag.up{background:rgba(62,62,255,.08);color:var(--blue)}
+.ugi-tag.ai-dual{background:linear-gradient(135deg,rgba(90,44,255,.15),rgba(62,62,255,.1));color:var(--purple);border:1px solid rgba(90,44,255,.2)}
+.ug-item .ai-agent-badge{display:inline-flex;padding:1px 6px;border-radius:4px;font-size:.6rem;font-weight:700;color:var(--cyan);background:rgba(16,219,229,.1);border:1px solid rgba(16,219,229,.2);margin-left:4px;white-space:nowrap}
+
+/* =========== Summary =========== */
+#summary{background:radial-gradient(ellipse at 30% 50%,rgba(62,62,255,.12),transparent 60%),radial-gradient(ellipse at 70% 50%,rgba(90,44,255,.08),transparent 60%),var(--bg-2)}
+.summary-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-bottom:24px}
+@media(max-width:720px){.summary-grid{grid-template-columns:1fr}}
+.s-card{background:rgba(255,255,255,.75);backdrop-filter:blur(12px);border:1px solid rgba(62,62,255,.15);border-radius:20px;padding:28px;position:relative;transition:all .35s}
+.s-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);background:#fff}
+.s-card .s-num{font-family:"Noto Serif SC",serif;font-size:2.8rem;font-weight:900;line-height:1;background:linear-gradient(135deg,var(--blue-deep),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:.2;margin-bottom:8px}
+.s-card h4{font-family:"Noto Serif SC",serif;font-size:1.1rem;font-weight:800;margin-bottom:10px;line-height:1.3}
+.s-card p{font-size:.85rem;color:var(--text-2);line-height:1.7}
+
+/* Agent bottom strip */
+.agent-strip{
+  background:linear-gradient(135deg,rgba(62,62,255,.05),rgba(90,44,255,.03));
+  border:1px solid rgba(62,62,255,.1);border-radius:16px;padding:20px 28px;
+  margin-bottom:60px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.agent-strip .as-badge{
+  padding:4px 10px;border-radius:6px;background:var(--blue);color:#fff;
+  font-size:.65rem;font-weight:700;letter-spacing:.1em;flex-shrink:0;
+}
+.agent-strip .as-title{font-family:"Noto Serif SC",serif;font-size:.95rem;font-weight:800;flex-shrink:0}
+.agent-strip .as-items{display:flex;gap:12px;flex-wrap:wrap;flex:1}
+.agent-strip .as-item{
+  padding:6px 14px;border-radius:8px;font-size:.78rem;font-weight:600;
+  background:rgba(255,255,255,.7);border:1px solid rgba(62,62,255,.08);
+}
+
+/* Big slogan */
+.slogan{text-align:center;padding:60px 20px;position:relative}
+.slogan-text{font-family:"Noto Serif SC",serif;font-size:clamp(2rem,5vw,3.6rem);font-weight:900;line-height:1.2;letter-spacing:.05em;background:linear-gradient(135deg,var(--blue-deep) 0%,var(--blue) 30%,var(--purple) 60%,var(--magenta) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.slogan-sub{margin-top:16px;font-size:1rem;color:var(--text-3);font-weight:500;letter-spacing:.1em}
+
+/* =========== Footer =========== */
+.footer{text-align:center;padding:60px 40px;color:var(--text-3);font-size:.82rem;border-top:1px solid var(--line);background:var(--bg)}
+.footer strong{display:block;color:var(--text);font-weight:700;margin-bottom:6px;background:linear-gradient(135deg,var(--blue-deep),var(--blue));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* =========== Animations =========== */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{animation:fadeUp .8s cubic-bezier(.2,.8,.2,1) both}
+@keyframes drawPath{from{stroke-dashoffset:4000}to{stroke-dashoffset:0}}
+.draw-path{stroke-dasharray:4000;animation:drawPath 3s ease-out forwards}
+.scroll-hint{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);font-size:.72rem;letter-spacing:.3em;color:var(--text-3);font-weight:600;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scroll-hint::after{content:"";width:1px;height:28px;background:linear-gradient(180deg,var(--blue),transparent);animation:drop 2s ease-in-out infinite}
+@keyframes drop{0%{transform:scaleY(0);transform-origin:top;opacity:0}40%{transform:scaleY(1);transform-origin:top;opacity:1}80%{transform:scaleY(1);transform-origin:bottom;opacity:0}100%{transform:scaleY(0);transform-origin:bottom;opacity:0}}
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand"><span class="nav-dot"></span><span class="nav-brand-text">D11 · 作战地图</span></div>
+    <div class="nav-links">
+      <a href="#rhythm">作战节奏</a>
+      <a href="#crowd">人群流转</a>
+      <a href="#upgrades">产品升级</a>
+      <a href="#summary">双11必做</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow"><span class="dot"></span><span>阿里妈妈 · 运动户外 · 双11 作战地图</span></div>
+    <h1><span class="g1">D11 作战地图</span><br><span class="g2">运动户外 AI 全链路解法与节奏指南</span></h1>
+
+    <div class="hero-desc">
+      <div class="hero-desc-main">
+        一份面向运动户外品牌的<strong>双11 全链路作战指南</strong>，围绕<span class="hl-purple">节奏</span> · <span class="hl-purple">人群</span> · <span class="hl-purple">产品升级</span>三大模块展开——从蓄水到爆发，拆解每个阶段的打法节奏与预算分配；从 <strong>UD 全域覆盖</strong>到<strong>百灵强势触达</strong>再到<strong>无界意图承接</strong>，打通 DEEPLINK 人群全链路流转；同步盘点淘内品广 + 淘外 UD 双11 核心产品能力升级。
+      </div>
+      <div class="hero-desc-keywords">
+        <span class="hero-kw" style="color:var(--blue-deep)">蓄水 → 第1波 → 第2波</span>
+        <span class="hero-kw" style="color:var(--purple)">DEEPLINK 全链路</span>
+        <span class="hero-kw" style="color:var(--magenta)">淘内品广 + 淘外UD 升级</span>
+        <span class="hero-kw" style="color:var(--cyan)">品效联投闭环</span>
+      </div>
+    </div>
+
+    <!-- Foundation: 达摩盘 × (AI万相点睛 + AI人群灵眸) -->
+    <div class="hero-foundation">
+      <div class="hero-found-base">
+        <div class="fb-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 2a6.5 6.5 0 0 1 6.5 6.5"/><circle cx="12" cy="12" r="2" fill="#fff"/></svg>
+        </div>
+        <div class="fb-title">达摩盘</div>
+        <div class="fb-sub">AI 识人 & AI 识货</div>
+        <div class="fb-sub" style="color:var(--purple);font-weight:600">底层人群系统</div>
+      </div>
+      <div class="hero-found-x">×</div>
+      <div class="hero-found-ais">
+        <div class="hero-found-ai">
+          <div class="fa-dot" style="background:var(--blue)"></div>
+          <div class="fa-content">
+            <div class="fa-name" style="color:var(--blue-deep)">AI 万相点睛</div>
+            <div class="fa-desc">五大纬度人群 · 竞争策略人群 · 生成式定向</div>
+          </div>
+        </div>
+        <div class="hero-found-ai">
+          <div class="fa-dot" style="background:var(--purple)"></div>
+          <div class="fa-content">
+            <div class="fa-name" style="color:var(--purple)">AI 人群灵眸</div>
+            <div class="fa-desc">三大智选目标 · 大模型解读 · 实时 CTR Uplift</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a class="hero-cta" href="#rhythm"><span><span>进入作战地图</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span></a>
+
+    <div class="hero-modules">
+      <a class="hero-mod-chip hm1" href="#rhythm" style="text-decoration:none;color:inherit">
+        <span class="hm-num">01</span>
+        <span class="hm-text"><span class="hm-title">三阶段作战节奏</span><span class="hm-sub">蓄水 · 第1波 · 第2波</span></span>
+      </a>
+      <a class="hero-mod-chip hm2" href="#crowd" style="text-decoration:none;color:inherit">
+        <span class="hm-num">02</span>
+        <span class="hm-text"><span class="hm-title">人群流转全链路</span><span class="hm-sub">UD → 百灵 → 无界</span></span>
+      </a>
+      <a class="hero-mod-chip hm3" href="#upgrades" style="text-decoration:none;color:inherit">
+        <span class="hm-num">03</span>
+        <span class="hm-text"><span class="hm-title">双11 产品能力升级</span><span class="hm-sub">淘内品广 + 淘外 UD</span></span>
+      </a>
+    </div>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</header>
+
+<!-- ============ 01 RHYTHM ============ -->
+<section id="rhythm">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">01 · CAMPAIGN RHYTHM</div>
+      <h2 class="sec-title"><span class="grad">三阶段作战节奏</span></h2>
+      <p class="sec-desc">蓄水期 → 第1波爆发 → 第2波爆发。每个阶段标注特征定位、人群策略、主推产品 × AI 能力。</p>
+    </div>
+
+    <!-- KPI strip above timeline -->
+    <div class="kpi-strip">
+      <div class="kpi-item k1">
+        <div class="kpi-phase">蓄水期 · 9月底–10月中</div>
+        <div class="kpi-nums">
+          <div class="kpi-num"><span class="val">~25%</span><span class="lbl">GMV占比</span></div>
+          <div class="kpi-num"><span class="val">~30%</span><span class="lbl">一本账占比</span></div>
+        </div>
+        <div class="kpi-ratio">
+          <div style="width:100%">
+            <div style="display:flex;height:8px;border-radius:4px;overflow:hidden">
+              <div class="kpi-ratio-bar brand" style="width:60%"></div>
+              <div class="kpi-ratio-bar perf" style="width:40%"></div>
+            </div>
+            <div class="kpi-ratio-vals"><span class="rv-brand">品广 60%</span><span class="rv-perf">效果 40%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-item k2">
+        <div class="kpi-phase">第1波爆发 · 10月中–11月初</div>
+        <div class="kpi-nums">
+          <div class="kpi-num"><span class="val">~49%</span><span class="lbl">GMV占比</span></div>
+          <div class="kpi-num"><span class="val">~48%</span><span class="lbl">一本账占比</span></div>
+        </div>
+        <div class="kpi-ratio">
+          <div style="width:100%">
+            <div style="display:flex;height:8px;border-radius:4px;overflow:hidden">
+              <div class="kpi-ratio-bar brand" style="width:50%"></div>
+              <div class="kpi-ratio-bar perf" style="width:50%"></div>
+            </div>
+            <div class="kpi-ratio-vals"><span class="rv-brand">品广 50%</span><span class="rv-perf">效果 50%</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="kpi-item k3">
+        <div class="kpi-phase">第2波爆发 · 11月初–11月中</div>
+        <div class="kpi-nums">
+          <div class="kpi-num"><span class="val">~26%</span><span class="lbl">GMV占比</span></div>
+          <div class="kpi-num"><span class="val">~22%</span><span class="lbl">一本账占比</span></div>
+        </div>
+        <div class="kpi-ratio">
+          <div style="width:100%">
+            <div style="display:flex;height:8px;border-radius:4px;overflow:hidden">
+              <div class="kpi-ratio-bar brand" style="width:30%"></div>
+              <div class="kpi-ratio-bar perf" style="width:70%"></div>
+            </div>
+            <div class="kpi-ratio-vals"><span class="rv-brand">品广 30%</span><span class="rv-perf">效果 70%</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-container">
+      <svg class="journey-svg" viewBox="0 0 1200 280" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="pathGrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#1F3AC3"/><stop offset="50%" stop-color="#5A2CFF"/><stop offset="100%" stop-color="#E1485F"/></linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        </defs>
+        <path d="M 120 140 C 320 60, 480 220, 600 140 S 880 60, 1080 140" stroke="#E1E1E3" stroke-width="2" stroke-dasharray="6 10" fill="none"/>
+        <path class="draw-path" d="M 120 140 C 320 60, 480 220, 600 140 S 880 60, 1080 140" stroke="url(#pathGrad)" stroke-width="3.5" fill="none" stroke-linecap="round" filter="url(#glow)"/>
+        <g><circle cx="120" cy="140" r="16" fill="#fff" stroke="#1F3AC3" stroke-width="3"/><circle cx="120" cy="140" r="6" fill="#1F3AC3"/><circle cx="120" cy="140" r="24" fill="none" stroke="#1F3AC3" stroke-width="1" opacity=".3"><animate attributeName="r" from="16" to="32" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" from=".6" to="0" dur="2s" repeatCount="indefinite"/></circle></g>
+        <g><circle cx="600" cy="140" r="16" fill="#fff" stroke="#5A2CFF" stroke-width="3"/><circle cx="600" cy="140" r="6" fill="#5A2CFF"/><circle cx="600" cy="140" r="24" fill="none" stroke="#5A2CFF" stroke-width="1" opacity=".3"><animate attributeName="r" from="16" to="32" dur="2s" begin=".5s" repeatCount="indefinite"/><animate attributeName="opacity" from=".6" to="0" dur="2s" begin=".5s" repeatCount="indefinite"/></circle></g>
+        <g><circle cx="1080" cy="140" r="18" fill="#fff" stroke="#E1485F" stroke-width="3.5"/><circle cx="1080" cy="140" r="7" fill="#E1485F"/><circle cx="1080" cy="140" r="26" fill="none" stroke="#E1485F" stroke-width="1.2" opacity=".3"><animate attributeName="r" from="18" to="36" dur="2s" begin="1s" repeatCount="indefinite"/><animate attributeName="opacity" from=".8" to="0" dur="2s" begin="1s" repeatCount="indefinite"/></circle></g>
+        <text x="120" y="100" font-family="Noto Serif SC" font-weight="900" font-size="20" fill="#1F3AC3" text-anchor="middle">蓄水期</text>
+        <text x="120" y="190" font-size="12" fill="#5a5d63" text-anchor="middle">9月底 – 10月中</text>
+        <text x="600" y="100" font-family="Noto Serif SC" font-weight="900" font-size="20" fill="#5A2CFF" text-anchor="middle">第1波爆发</text>
+        <text x="600" y="190" font-size="12" fill="#5a5d63" text-anchor="middle">10月中 – 11月初</text>
+        <text x="1080" y="95" font-family="Noto Serif SC" font-weight="900" font-size="20" fill="#E1485F" text-anchor="middle">第2波爆发</text>
+        <text x="1080" y="190" font-size="12" fill="#5a5d63" text-anchor="middle">11月初 – 11月中</text>
+        <rect x="60" y="230" width="1080" height="36" rx="18" fill="rgba(90,44,255,.06)" stroke="rgba(90,44,255,.15)" stroke-width="1"/>
+        <text x="600" y="253" text-anchor="middle" font-size="12" fill="#5A2CFF" font-weight="600">底层贯穿：达摩盘 × AI 万相点睛 + AI 人群灵眸 + 万相智投 AIGC</text>
+        <circle cx="360" cy="80" r="30" fill="none" stroke="#1F9AFF" stroke-width="1" opacity=".12"/>
+        <circle cx="840" cy="200" r="34" fill="none" stroke="#F7714D" stroke-width="1" opacity=".1"/>
+      </svg>
+
+      <!-- 蓄水期卡片 -->
+      <div class="journey-node n1" style="left:0%;top:310px">
+        <span class="ph-tag">蓄水期</span>
+        <h4>人群筑基 · 资源锁定</h4>
+        <div class="node-sec">
+          <div class="node-sec-title t-pos"><span class="nst-dot"></span>特征定位</div>
+          <div class="node-sec-text">洞察先行，早鸟锁稀缺资源。<strong>广域种草</strong>，最大化 D/E 层人群资产沉淀。</div>
+        </div>
+        <div class="node-sec">
+          <div class="node-sec-title t-crowd"><span class="nst-dot"></span>人群策略</div>
+          <div class="node-sec-text">行业策略人群 · 运动圈层 · 大促易感 · 跨类目拉新</div>
+        </div>
+        <div class="node-sec">
+          <div class="node-sec-title t-prod"><span class="nst-dot"></span>主推产品 × AI 能力 <span style="font-size:.6rem;color:var(--blue-deep);font-weight:700;margin-left:auto;background:rgba(62,62,255,.08);padding:2px 8px;border-radius:5px">品广主导 60%</span></div>
+          <div class="prod-ai-row">
+            <div class="prod-ai-line"><span class="pa-prod">UD品牌/超级全域通</span><span class="pa-sep">×</span><span class="pa-ai">万相点睛·五大纬度人群</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">品牌特秀</span><span class="pa-sep">×</span><span class="pa-ai">万相点睛·人群灵眸解读</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">ShowMAX进店</span><span class="pa-sep">×</span><span class="pa-ai">四大场景确定交付</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">Topbrand开屏</span><span class="pa-sep">×</span><span class="pa-ai">微动效·会员运营</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">人群推广</span><span class="pa-sep">×</span><span class="pa-ai">万相点睛·意图定向</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第1波爆发卡片 -->
+      <div class="journey-node n2" style="left:33%;top:370px">
+        <span class="ph-tag">第1波爆发</span>
+        <h4>精准拦截 · 爆品拉动</h4>
+        <div class="node-sec">
+          <div class="node-sec-title t-pos"><span class="nst-dot"></span>特征定位</div>
+          <div class="node-sec-text">新客首购/老客复购，<strong>新品&超单爆发</strong>，DEEPLINK 全量焕活，搜索攻防。</div>
+        </div>
+        <div class="node-sec">
+          <div class="node-sec-title t-crowd"><span class="nst-dot"></span>人群策略</div>
+          <div class="node-sec-text">大促易感 · 行业拉新优选 · 类目行为 · 品牌/竞品</div>
+        </div>
+        <div class="node-sec">
+          <div class="node-sec-title t-prod"><span class="nst-dot"></span>主推产品 × AI 能力 <span style="font-size:.6rem;color:var(--purple);font-weight:700;margin-left:auto;background:rgba(90,44,255,.08);padding:2px 8px;border-radius:5px">品效并重 50:50</span></div>
+          <div class="prod-ai-row">
+            <div class="prod-ai-line"><span class="pa-prod">特秀白盒</span><span class="pa-sep">×</span><span class="pa-ai">万相点睛·人群灵眸解读</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">一搜即现</span><span class="pa-sep">×</span><span class="pa-ai">AIT·AI意图词包</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">ShowMAX加购</span><span class="pa-sep">×</span><span class="pa-ai">极速加购·确定交付</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">竞争击穿</span><span class="pa-sep">×</span><span class="pa-ai">万相点睛·竞争策略</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">关键词推广</span><span class="pa-sep">×</span><span class="pa-ai">AI选品·最大化出价</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第2波爆发卡片 -->
+      <div class="journey-node n3" style="left:66%;top:430px">
+        <span class="ph-tag">第2波爆发</span>
+        <h4>实时调优 · 效率冲刺</h4>
+        <div class="node-sec">
+          <div class="node-sec-title t-pos"><span class="nst-dot"></span>特征定位</div>
+          <div class="node-sec-text">蓄水召回，<strong>双峰复购</strong>；趋势款&爆款全面爆发，品效全力冲刺。</div>
+        </div>
+        <div class="node-sec">
+          <div class="node-sec-title t-crowd"><span class="nst-dot"></span>人群策略</div>
+          <div class="node-sec-text">前序未购 · 类目行为 · 品牌/竞品 · 再营销</div>
+        </div>
+        <div class="node-sec">
+          <div class="node-sec-title t-prod"><span class="nst-dot"></span>主推产品 × AI 能力 <span style="font-size:.6rem;color:var(--magenta);font-weight:700;margin-left:auto;background:rgba(225,72,95,.08);padding:2px 8px;border-radius:5px">效果主导 30:70</span></div>
+          <div class="prod-ai-row">
+            <div class="prod-ai-line"><span class="pa-prod">关键词推广</span><span class="pa-sep">×</span><span class="pa-ai">AI选品·最大化出价</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">人群推广</span><span class="pa-sep">×</span><span class="pa-ai">人群灵眸·高转化信号</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">货品全站推</span><span class="pa-sep">×</span><span class="pa-ai">AI三引擎·多目标</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">ShowMAX追击</span><span class="pa-sep">×</span><span class="pa-ai">分钟级全域拦截</span></div>
+            <div class="prod-ai-line"><span class="pa-prod">AI超级品牌</span><span class="pa-sep">×</span><span class="pa-ai">全域追投·评估体系</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 CROWD FLOW ============ -->
+<section id="crowd">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">02 · CROWD FLOW</div>
+      <h2 class="sec-title"><span class="grad">AI × 人群流转</span></h2>
+      <p class="sec-desc">达摩盘（底层人群系统）× AI 万相点睛 + AI 人群灵眸（两大 AI 能力加持），驱动 UD 全域覆盖 → 百灵强势触达 → 无界意图承接的人群流转闭环。UD 线上线下投放数据沉淀至达摩盘，可圈包用于百灵再营销。</p>
+    </div>
+
+    <div class="crowd-wrap">
+      <svg class="crowd-svg" viewBox="0 0 1200 720" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="cg-ud" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5A2CFF"/><stop offset="100%" stop-color="#10DBE5"/></linearGradient>
+          <linearGradient id="cg-bl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#10DBE5"/><stop offset="100%" stop-color="#3E3EFF"/></linearGradient>
+          <linearGradient id="cg-wj" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#3E3EFF"/><stop offset="100%" stop-color="#1F9AFF"/></linearGradient>
+          <linearGradient id="cg-base" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#5A2CFF"/><stop offset="50%" stop-color="#3E3EFF"/><stop offset="100%" stop-color="#E1485F"/></linearGradient>
+          <marker id="ca-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#10DBE5"/></marker>
+          <marker id="ca-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#3E3EFF"/></marker>
+          <marker id="ca-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#5A2CFF"/></marker>
+        </defs>
+
+        <!-- UD · 全域覆盖 (UD品牌=超级全域通) -->
+        <foreignObject x="30" y="20" width="340" height="320">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="crowd-node" style="border-color:rgba(16,219,229,.4)">
+            <div class="cn-title"><span class="d" style="background:#10DBE5"></span>UD · 全域覆盖</div>
+            <div class="cn-sub">广域种草 · D/E 层规模化蓄水</div>
+            <ul>
+              <li><strong>UD品牌/超级全域通</strong> · 30+ 媒体 TA 保量 <span class="ai-badge">AI万相点睛</span></li>
+              <li><strong>UD效果</strong> · 红猫计划 · 效果导向</li>
+              <li><strong>品牌定制</strong> · ShowMAX 户外极速达</li>
+              <li><strong>家享智屏</strong> · OTT 开机 + B站联投</li>
+              <li><strong>超级爆款 / 超级专项 / 超级闪购通</strong></li>
+            </ul>
+          </div>
+        </foreignObject>
+
+        <!-- 百灵 · 强势触达 -->
+        <foreignObject x="430" y="20" width="340" height="320">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="crowd-node" style="border-color:rgba(62,62,255,.4)">
+            <div class="cn-title"><span class="d" style="background:#3E3EFF"></span>百灵 · 强势触达</div>
+            <div class="cn-sub">淘内心智占位 · 搜索拦截 · 心智焕活</div>
+            <ul>
+              <li><strong>品牌特秀</strong> <span class="ai-badge">AI万相点睛·人群灵眸</span></li>
+              <li><strong>一搜即现</strong> + <strong>赢搜通</strong> <span class="ai-badge">AIT·AI词包</span></li>
+              <li><strong>人群击穿</strong> · <strong>竞争击穿</strong> <span class="ai-badge">万相点睛·竞争策略</span></li>
+              <li><strong>ShowMAX</strong> 极速加购 · 确定交付</li>
+              <li><strong>手淘开屏</strong> Topshow + Topview</li>
+            </ul>
+          </div>
+        </foreignObject>
+
+        <!-- 无界 · 意图承接 -->
+        <foreignObject x="830" y="20" width="340" height="320">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="crowd-node" style="border-color:rgba(31,154,255,.4)">
+            <div class="cn-title"><span class="d" style="background:#1F9AFF"></span>无界 · 意图承接</div>
+            <div class="cn-sub">效果转化收割 · 再营销加速</div>
+            <ul>
+              <li><strong>关键词推广</strong> · AI 最大化出价 · AI挖词</li>
+              <li><strong>人群推广</strong> · 高转化信号 <span class="ai-badge">AI人群灵眸</span></li>
+              <li><strong>货品全站推</strong> · AI 三引擎调优</li>
+              <li><strong>AI 超级品牌</strong> · 全域追投评估</li>
+            </ul>
+          </div>
+        </foreignObject>
+
+        <!-- 主流程箭头 -->
+        <path d="M 370 180 L 430 180" stroke="url(#cg-ud)" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#ca-cyan)"/>
+        <text x="400" y="165" text-anchor="middle" font-size="11" fill="#10DBE5" font-weight="600">种草人群</text>
+        <text x="400" y="200" text-anchor="middle" font-size="10" fill="#8a8d95">回流触达</text>
+
+        <path d="M 770 180 L 830 180" stroke="url(#cg-bl)" stroke-width="3" fill="none" stroke-linecap="round" marker-end="url(#ca-blue)"/>
+        <text x="800" y="165" text-anchor="middle" font-size="11" fill="#3E3EFF" font-weight="600">搜索拦截</text>
+        <text x="800" y="200" text-anchor="middle" font-size="10" fill="#8a8d95">意图承接</text>
+
+        <!-- === 达摩盘底层 === -->
+        <rect x="30" y="460" width="1140" height="130" rx="20" fill="rgba(90,44,255,.04)" stroke="rgba(90,44,255,.2)" stroke-width="1.5" stroke-dasharray="6 4"/>
+        <foreignObject x="50" y="470" width="1100" height="110">
+          <div xmlns="http://www.w3.org/1999/xhtml" class="crowd-foundation">
+            <div class="cf-title">达摩盘 · 底层人群系统 × 两大 AI 能力加持</div>
+            <div class="cf-sub">AI 识人 / AI 识货 · 品牌 DNA · WISE 原声推理 · 双11 心理账户人群 · DEEPLINK 全链路资产沉淀</div>
+            <div class="cf-chips">
+              <span class="cf-chip damo">品牌 DNA · AI Persona</span>
+              <span class="cf-chip damo">WISE 原声推理</span>
+              <span class="cf-chip damo">双11 心理账户人群</span>
+              <span class="cf-chip ai">AI 万相点睛 · 五大纬度人群</span>
+              <span class="cf-chip ai">AI 人群灵眸 · 三大智选目标</span>
+            </div>
+          </div>
+        </foreignObject>
+
+        <!-- UD数据 → 达摩盘沉淀 (左侧弧线) -->
+        <path d="M 200 340 Q 200 410 200 460" stroke="#10DBE5" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#ca-purple)" opacity=".6"/>
+        <text x="165" y="400" font-size="10" fill="#10DBE5" font-weight="500">投放数据</text>
+        <text x="165" y="414" font-size="10" fill="#10DBE5" font-weight="500">沉淀</text>
+
+        <!-- 达摩盘 → 百灵 圈包再营销 (中间弧线) -->
+        <path d="M 600 460 Q 600 410 600 340" stroke="#5A2CFF" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#ca-purple)" opacity=".6"/>
+        <text x="615" y="400" font-size="10" fill="#5A2CFF" font-weight="600">圈包再营销</text>
+
+        <!-- 达摩盘 → 无界 人群包供给 (右侧弧线) -->
+        <path d="M 1000 460 Q 1000 410 1000 340" stroke="#1F9AFF" stroke-width="2" fill="none" stroke-dasharray="5 4" marker-end="url(#ca-purple)" opacity=".6"/>
+        <text x="1015" y="400" font-size="10" fill="#1F9AFF" font-weight="500">人群包</text>
+        <text x="1015" y="414" font-size="10" fill="#1F9AFF" font-weight="500">供给</text>
+
+        <!-- 万相智投标注条 -->
+        <rect x="30" y="620" width="1140" height="48" rx="24" fill="rgba(225,72,95,.05)" stroke="rgba(225,72,95,.2)" stroke-width="1"/>
+        <text x="600" y="649" text-anchor="middle" font-family="Noto Serif SC" font-weight="700" font-size="13" fill="#E1485F">万相智投 · AIGA 智能行动 × AIGB 智能出价 × AIGC 内容引擎</text>
+      </svg>
+
+      <!-- 两大增长路径 (融合在人群流转图内) -->
+      <div style="margin-top:32px;padding-top:24px;border-top:1.5px dashed rgba(90,44,255,.15)">
+        <div style="font-family:'Noto Serif SC',serif;font-size:1.2rem;font-weight:800;margin-bottom:4px;color:var(--blue-deep)">两大增长路径</div>
+        <div style="font-size:.82rem;color:var(--text-2);margin-bottom:16px">基于 UD + 百灵 + 无界产品矩阵，运动户外品牌双11 可聚焦两条核心增长路线</div>
+      </div>
+      <div class="growth-paths">
+        <div class="growth-path gp1">
+          <div class="gp-badge">路径一 · 品牌攻防</div>
+          <div class="gp-title">高净值人群攻防</div>
+          <div class="gp-subtitle">抢占心智，破圈拉新 — 以品牌广告为核心，锁定高净值运动人群，沉淀 DEEPLINK 资产规模</div>
+          <div class="gp-flow">
+            <span class="gp-flow-item">UD品牌/超级全域通</span>
+            <span class="gp-flow-arrow">→</span>
+            <span class="gp-flow-item">Topshow 开屏</span>
+            <span class="gp-flow-arrow">→</span>
+            <span class="gp-flow-item">人群击穿</span>
+          </div>
+          <div class="gp-kpis">
+            <div class="gp-kpi"><div class="gk-val">+5x%</div><div class="gk-lbl">人群资产规模提升</div></div>
+            <div class="gp-kpi"><div class="gk-val">+2x%</div><div class="gk-lbl">品效引导客单价提升</div></div>
+          </div>
+        </div>
+        <div class="growth-path gp2">
+          <div class="gp-badge">路径二 · 效果收割</div>
+          <div class="gp-title">生意经营快收割</div>
+          <div class="gp-subtitle">效果收割，转化卡位 — 以效果广告为核心，精准引流 + 品效配合提升转化效率</div>
+          <div class="gp-flow">
+            <span class="gp-flow-item">UD效果</span>
+            <span class="gp-flow-arrow">→</span>
+            <span class="gp-flow-item">一搜 & 赢搜通</span>
+            <span class="gp-flow-arrow">→</span>
+            <span class="gp-flow-item">竞争击穿</span>
+          </div>
+          <div class="gp-kpis">
+            <div class="gp-kpi"><div class="gk-val">&gt;12%</div><div class="gk-lbl">投放精准引流提升</div></div>
+            <div class="gp-kpi"><div class="gk-val">6.5%+</div><div class="gk-lbl">品效配合转化提升</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 PRODUCT UPGRADES ============ -->
+<section id="upgrades">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">03 · PRODUCT UPGRADES</div>
+      <h2 class="sec-title"><span class="grad">双11 产品能力升级</span></h2>
+      <p class="sec-desc">淘内品广 + 淘外 UD 两大产品线核心升级点一览。</p>
+    </div>
+
+    <!-- 特征总结 -->
+    <div class="upgrade-summary">
+      <div class="us-title">升级特征总结</div>
+      <div class="us-chips">
+        <div class="us-chip"><span class="usc-dot ai"></span><strong>AIGC 全域覆盖：</strong>淘内所有 BP + UD 全产品均适用 AIGC 内容能力</div>
+        <div class="us-chip"><span class="usc-dot ai"></span><strong>AI 洞察拉新 Agent：</strong>品牌特秀 / 人群击穿 / 赢搜通 / ShowMAX 四大产品接入</div>
+        <div class="us-chip"><span class="usc-dot new"></span><strong>新产品·超级亮相：</strong>UD 品牌专属新产品上线</div>
+        <div class="us-chip"><span class="usc-dot up"></span><strong>能力升级：</strong>ShowMAX 四大场景交付 + 手淘开屏扩容 + 一搜即现 AIT 词包</div>
+      </div>
+    </div>
+
+    <!-- AI 能力突出展示 -->
+    <div class="ai-cap-bar bar-aigc">
+      <span class="acb-icon">✦</span>
+      <div class="acb-body">
+        <div class="acb-title">AIGC 全域覆盖 — 淘内全部 BP + UD 全产品适用</div>
+        <div class="acb-sub">万相智投 AIGC 内容引擎贯穿所有产品线，素材秒级生产，直投 UD / 百灵 / 无界</div>
+      </div>
+    </div>
+    <div class="ai-cap-bar bar-agent">
+      <span class="acb-icon">◎</span>
+      <div class="acb-body">
+        <div class="acb-title">AI 洞察拉新 Agent — 四大产品接入</div>
+        <div class="acb-sub"><strong>品牌特秀</strong> · <strong>人群击穿</strong> · <strong>赢搜通</strong> · <strong>ShowMAX</strong> — AI 自动洞察高价值新客</div>
+      </div>
+    </div>
+
+    <!-- 按升级分类分组 -->
+    <div class="ug-groups">
+
+      <!-- NEW 新产品 -->
+      <div class="ug-group">
+        <div class="ug-cat">
+          <span class="ug-cat-badge cat-new">NEW</span>
+          <span class="ug-cat-title">新产品上线</span>
+        </div>
+        <div class="ug-items">
+          <div class="ug-item">
+            <span class="ugi-src wai">淘外</span>
+            <span class="ugi-name">超级亮相</span>
+            <span class="ugi-desc">UD 品牌专属<strong>新产品</strong>，高浓度品牌首亮相</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI 能力升级 -->
+      <div class="ug-group">
+        <div class="ug-cat">
+          <span class="ug-cat-badge cat-ai">AI</span>
+          <span class="ug-cat-title">AI 能力升级</span>
+        </div>
+        <div class="ug-items">
+          <div class="ug-item">
+            <span class="ugi-src nei">淘内</span>
+            <span class="ugi-name">品牌特秀</span>
+            <span class="ugi-desc">投前<strong>万相点睛</strong>人群智选 · 投中模型护航 · 投后<strong>人群灵眸</strong>价值解读 <span class="ai-agent-badge">AI洞察拉新Agent</span></span>
+            <span class="ugi-tag ai-dual">AI双引擎</span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-src nei">淘内</span>
+            <span class="ugi-name">人群击穿</span>
+            <span class="ugi-desc"><strong>万相点睛</strong>竞争策略人群 · <strong>人群灵眸</strong>智选目标 · 拓展视频tab+淘金币场域 <span class="ai-agent-badge">AI洞察拉新Agent</span></span>
+            <span class="ugi-tag ai-dual">AI双引擎</span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-src nei">淘内</span>
+            <span class="ugi-name">ShowMAX</span>
+            <span class="ugi-desc">四大场景（进店/加购/追击/入会）<strong>确定性交付</strong> <span class="ai-agent-badge">AI洞察拉新Agent</span></span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-src nei">淘内</span>
+            <span class="ugi-name">一搜即现</span>
+            <span class="ugi-desc">WIN 策略词包 + <strong>AIT AI 意图词包</strong> + 全域跳SRP 四维新增</span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-src wai">淘外</span>
+            <span class="ugi-name">超级全域通</span>
+            <span class="ugi-desc"><strong>万相点睛人群智寻升级</strong>：四大人群 × 五大能力 + 新助推力</span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-src wai">淘外</span>
+            <span class="ugi-name">AI 超级品牌</span>
+            <span class="ugi-desc"><strong>语脉 + AI 闪投 + 全域追投 + 评估体系</strong> 四件套</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 能力升级 -->
+      <div class="ug-group">
+        <div class="ug-cat">
+          <span class="ug-cat-badge cat-up">升级</span>
+          <span class="ug-cat-title">产品能力升级</span>
+        </div>
+        <!-- 淘内 -->
+        <div class="ug-sub-label nei">淘内品牌广告</div>
+        <div class="ug-items">
+          <div class="ug-item">
+            <span class="ugi-name">赢搜通</span>
+            <span class="ugi-desc"><strong>全域搜索交付</strong> + 品专词/定制SRP 品牌"门面" <span class="ai-agent-badge">AI洞察拉新Agent</span></span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-name">手淘开屏</span>
+            <span class="ugi-desc">Topshow 会员运营 + Topview 微动效；创意/人群包<strong>数量扩容</strong></span>
+          </div>
+        </div>
+        <!-- 淘外 -->
+        <div class="ug-sub-label wai">淘外 UD</div>
+        <div class="ug-items">
+          <div class="ug-item">
+            <span class="ugi-name">家享智屏</span>
+            <span class="ugi-desc">OTT 开机浓度↑ + <strong>新增 B 站 OTT 联投</strong></span>
+          </div>
+          <div class="ug-item">
+            <span class="ugi-name">单媒体 · 超信2.0</span>
+            <span class="ugi-desc"><strong>AI 拓版</strong> + AI 创意内置；中腰部媒体低门槛 TA100%</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 SUMMARY + SLOGAN ============ -->
+<section id="summary">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">04 · D11 MUST-DO</div>
+      <h2 class="sec-title"><span class="grad">双11 必做清单</span></h2>
+      <p class="sec-desc">四条核心行动指南，帮助品牌在双11 中最大化投放回报。</p>
+    </div>
+
+    <div class="summary-grid">
+      <div class="s-card">
+        <div class="s-num">01</div>
+        <h4>前置投放，抢占早鸟杠杆</h4>
+        <p>9/15 前品专返 10%，9/20 前百灵返 10%；100 万 AIGC 高阶权益先到先得。蓄水期锁定稀缺资源 = 大促期间的购买权和返点双重收益。</p>
+      </div>
+      <div class="s-card">
+        <div class="s-num">02</div>
+        <h4>抓住人群机会，DEEPLINK 分层运营</h4>
+        <p>蓄水期最大化 D/E 层沉淀，第1波推动 P/I 层焕活，第2波加速 N/K 层流转。每个阶段精准匹配人群策略，避免人群断层。</p>
+      </div>
+      <div class="s-card">
+        <div class="s-num">03</div>
+        <h4>用好 AI 双引擎：万相点睛 + 人群灵眸</h4>
+        <p>AI 万相点睛提供五大纬度人群 + 竞争策略人群，AI 人群灵眸三大智选目标灵活切换。两大 AI 能力是今年双11 的核心竞争力。</p>
+      </div>
+      <div class="s-card">
+        <div class="s-num">04</div>
+        <h4>品效联投，UD→百灵→无界串联闭环</h4>
+        <p>UD 站外种草数据沉淀达摩盘 → 百灵圈包再营销 → 无界意图承接。ShowMAX 全域追击分钟级拦截，种草即回收。</p>
+      </div>
+    </div>
+
+    <!-- AI Agent 串联底层描述 -->
+    <div class="agent-strip">
+      <span class="as-badge">底层能力</span>
+      <span class="as-title">AI Agent 矩阵 · 串联全周期</span>
+      <div class="as-items">
+        <span class="as-item">无界 AI 小万 · 每小时巡检</span>
+        <span class="as-item">百灵 AI 灵悉 · 实时优化</span>
+        <span class="as-item">UD AI 操盘 · 站外调优</span>
+        <span class="as-item">达摩盘 AI 管家 · 任务自动执行</span>
+      </div>
+    </div>
+
+    <!-- 大字 Slogan -->
+    <div class="slogan">
+      <div class="slogan-text">高投高返，早投早返</div>
+      <div class="slogan-sub">INVEST MORE, EARN MORE · START EARLY, WIN BIG</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <strong>让每一份经营都算数</strong>
+    D11 作战地图 · 运动户外 AI 全链路解法与节奏指南 · 基于阿里妈妈双11 营销一站式指南 · 2026.09
+  </div>
+</footer>
+
+<script>
+var obs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){if(e.isIntersecting){e.target.classList.add('fade-up');obs.unobserve(e.target)}});
+},{threshold:.08});
+document.querySelectorAll('section,.s-card,.journey-node,.hero-mod-chip,.crowd-node,.kpi-item,.upgrade-summary,.ut-col,.agent-strip,.growth-path').forEach(function(el){obs.observe(el)});
+
+var sections = document.querySelectorAll('section, header');
+var navLinks = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',function(){
+  var pos = window.scrollY + 120;
+  sections.forEach(function(s){
+    if(s.id && pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight){
+      navLinks.forEach(function(a){a.style.color = (a.getAttribute('href') === '#'+s.id) ? 'var(--blue)' : ''});
+    }
+  });
+});
+</script>
+</body>
+</html>
